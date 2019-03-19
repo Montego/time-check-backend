@@ -26,6 +26,6 @@ public class Event {
     private String full_info;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fullEventList_id")
+    @JoinColumn(name = "fullEventsList_id")
     private FullEventsList fullEventsList;
 }

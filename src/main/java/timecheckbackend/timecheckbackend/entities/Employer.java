@@ -38,7 +38,7 @@ public class Employer {
     private LocalDateTime birthday;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fullEventList_id")
+    @JoinColumn(name = "fullEventsList_id")
     private FullEventsList fullEventsList;
 
 }
