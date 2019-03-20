@@ -8,9 +8,9 @@ import timecheckbackend.timecheckbackend.repositoires.EventRepository;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
-@RequestMapping("events")
+@RequestMapping("api/events")
 public class EventController {
     private final EventRepository eventRepository;
 

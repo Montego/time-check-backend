@@ -7,7 +7,7 @@ import timecheckbackend.timecheckbackend.repositoires.testRESTRepo;
 
 
 @RestController
-@RequestMapping("/testREST")
+@RequestMapping("/api/testREST")
 public class testRESTController {
     private final testRESTRepo testRESTRepo;
     @Autowired
@@ -17,6 +17,10 @@ public class testRESTController {
     @PostMapping("/post")
     public TestREST create(@RequestBody TestREST testREST) {
         return testRESTRepo.save(testREST);
+    }
+    @GetMapping("/test")
+    public String test(){
+        return "HelloWorld";
     }
 
 }
