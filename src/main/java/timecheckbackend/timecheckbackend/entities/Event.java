@@ -16,7 +16,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-//    @NotBlank(message = "Date can't be empty")
+    @NotBlank(message = "Date can't be empty")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String date_of;
 
