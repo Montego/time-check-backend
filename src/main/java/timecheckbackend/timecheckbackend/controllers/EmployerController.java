@@ -4,46 +4,51 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timecheckbackend.timecheckbackend.entities.Employer;
-import timecheckbackend.timecheckbackend.repositoires.EmployerRepository;
+import timecheckbackend.timecheckbackend.services.EmployerService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("employers")
+@RequestMapping("api/employers")
 public class EmployerController {
-    private final EmployerRepository employerRepository;
+    private final EmployerService employerService;
 
     @Autowired
-    public EmployerController(EmployerRepository employerRepository) {
-        this.employerRepository = employerRepository;
+    public EmployerController(EmployerService employerService) {
+        this.employerService = employerService;
     }
 
     @GetMapping
-    public List<Employer> list() {
-        return employerRepository.findAll();
+    public List<Employer> getList() {
+        System.out.println("get all employers");
+        return employerService.getAll();
     }
 
     @GetMapping("{id}")
-    public Employer getOne(@PathVariable("id") Employer employer) {
-        return employer;
+    public Employer getOne(@PathVariable Long id) {
+        System.out.println("get one employer");
+        return employerService.getOne(id);
     }
 
     @PostMapping()
-    public Employer create(@RequestBody Employer employer) {
-//        employer.setCreationDate(LocalDateTime.now());
-        return employerRepository.save(employer);
+    public void create(@RequestBody Employer employer) {
+        employer.setCreationDate(LocalDateTime.now());
+        System.out.println("save employer");
+        employerService.save(employer);
     }
 
     @PutMapping("{id}")
-    public Employer update(
+    public void update(
             @PathVariable("id") Employer employerFromDB,
             @RequestBody Employer employer) {
         BeanUtils.copyProperties(employer, employerFromDB, "id");
-        return employerRepository.save(employerFromDB);
+        employerService.save(employerFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Employer employer) {
-        employerRepository.delete(employer);
+    public void delete(@PathVariable Long id) {
+        employerService.delete(id);
+        System.out.println("delete employer");
     }
 }

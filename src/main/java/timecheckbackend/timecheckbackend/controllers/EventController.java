@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timecheckbackend.timecheckbackend.entities.Event;
-import timecheckbackend.timecheckbackend.repositoires.EventRepository;
+import timecheckbackend.timecheckbackend.services.EventService;
 
 import java.util.List;
 
@@ -12,39 +12,39 @@ import java.util.List;
 @RestController
 @RequestMapping("api/events")
 public class EventController {
-    private final EventRepository eventRepository;
+    private final EventService eventService;
 
     @Autowired
-    public EventController(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @GetMapping
-    public List<Event> list() {
-        return eventRepository.findAll();
+    public List<Event> eventsList() {
+        return eventService.getAll();
     }
 
     @GetMapping("{id}")
-    public Event getOne(@PathVariable("id") Event event) {
-        return event;
+    public Event getOne(@PathVariable Long id) {
+        return eventService.getOne(id);
     }
 
     @PostMapping()
-    public Event create(@RequestBody Event event) {
-//        event.setCreationDate(LocalDateTime.now());
-        return eventRepository.save(event);
+    public void create(@RequestBody Event event) {
+//      event.setCreationDate(LocalDateTime.now());
+        eventService.save(event);
     }
 
     @PutMapping("{id}")
-    public Event update(
+    public void update(
             @PathVariable("id") Event eventFromDB,
             @RequestBody Event event) {
         BeanUtils.copyProperties(event, eventFromDB, "id");
-        return eventRepository.save(eventFromDB);
+        eventService.save(eventFromDB);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Event event) {
-        eventRepository.delete(event);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        eventService.delete(id);
     }
 }

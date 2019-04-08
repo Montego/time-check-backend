@@ -16,13 +16,19 @@ public class Employer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "First name can't be empty")
-    private String firstName;
+//    @NotBlank(message = "Last name can't be empty")
+    private String lastname;
 
-    @NotBlank(message = "Last name can't be empty")
-    private String lastName;
+    //    @NotBlank(message = "First name can't be empty")
+    private String firstname;
 
-    private String patronicName;
+    private String patronic;
+
+    private String fullname = lastname + " " + firstname + " " + patronic;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(updatable = false)
+    private LocalDateTime creationDate;
 
     @ManyToMany
     @JoinTable(
@@ -34,8 +40,8 @@ public class Employer {
 
 
     @NotBlank(message = "Birthday Date can't be empty")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime birthday;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private String birthday;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fullEventsList_id")

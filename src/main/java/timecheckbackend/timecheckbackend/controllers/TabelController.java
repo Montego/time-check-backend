@@ -9,7 +9,7 @@ import timecheckbackend.timecheckbackend.repositoires.TabelRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("tabel")
+@RequestMapping("api/tabel")
 public class TabelController {
     private final TabelRepository tabelRepository;
 

@@ -3,15 +3,15 @@ package timecheckbackend.timecheckbackend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timecheckbackend.timecheckbackend.entities.TestREST;
-import timecheckbackend.timecheckbackend.repositoires.testRESTRepo;
+import timecheckbackend.timecheckbackend.repositoires.TestRESTRepo;
 
 
 @RestController
 @RequestMapping("/api/testREST")
 public class testRESTController {
-    private final testRESTRepo testRESTRepo;
+    private final TestRESTRepo testRESTRepo;
     @Autowired
-    public testRESTController(testRESTRepo testRESTRepo) {
+    public testRESTController(TestRESTRepo testRESTRepo) {
         this.testRESTRepo = testRESTRepo;
     }
     @PostMapping("/post")

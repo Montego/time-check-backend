@@ -25,19 +25,19 @@ public class Tabel {
     private Set<Employer> employers = new HashSet<>();
 
 
-    @NotBlank(message = "Date for tabel can't be empty")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime tabelEvent;
+//    @NotBlank(message = "Date for tabel can't be empty")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private String date_of;
 
-    private int overTime;
+    private int overtime;
 
-    private int lessTime;
+    private int lesstime;
 
-    private int SeakLeave;
+    private int seakteave;
 
-    private int TimeOff;
+    private int timeoff;
 
-    private int Vacation;
+    private int vacation;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fullEventsList_id")
