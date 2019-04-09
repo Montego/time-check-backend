@@ -35,6 +35,7 @@ public class EmployerController {
     public void create(@RequestBody Employer employer) {
         employer.setCreationDate(LocalDateTime.now());
         System.out.println("save employer");
+        employer.setFullname(employer.getLastname() + " " +  employer.getFirstname() + " " + employer.getPatronic());
         employerService.save(employer);
     }
 
