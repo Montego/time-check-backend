@@ -30,9 +30,11 @@ public class EventController {
     }
 
     @PostMapping()
-    public void create(@RequestBody Event event) {
+    public Event create(@RequestBody Event event) {
 //      event.setCreationDate(LocalDateTime.now());
+        System.out.println("save event");
         eventService.save(event);
+        return event;
     }
 
     @PutMapping("{id}")

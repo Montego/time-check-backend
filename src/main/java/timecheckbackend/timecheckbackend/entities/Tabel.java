@@ -33,9 +33,9 @@ public class Tabel {
 
     private int lesstime;
 
-    private int seakteave;
+    private int seakleave;
 
-    private int timeoff;
+    private int time_off;
 
     private int vacation;
 

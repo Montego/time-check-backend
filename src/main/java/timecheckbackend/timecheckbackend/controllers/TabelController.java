@@ -31,7 +31,9 @@ public class TabelController {
     @PostMapping()
     public Tabel create(@RequestBody Tabel tabel) {
 //        employer.setCreationDate(LocalDateTime.now());
-        return tabelRepository.save(tabel);
+        System.out.println("save tabel");
+        tabelRepository.save(tabel);
+        return tabel;
     }
 
     @PutMapping("{id}")

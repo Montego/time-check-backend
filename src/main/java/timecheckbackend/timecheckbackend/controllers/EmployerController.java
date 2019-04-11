@@ -32,11 +32,12 @@ public class EmployerController {
     }
 
     @PostMapping()
-    public void create(@RequestBody Employer employer) {
+    public Employer create(@RequestBody Employer employer) {
         employer.setCreationDate(LocalDateTime.now());
         System.out.println("save employer");
         employer.setFullname(employer.getLastname() + " " +  employer.getFirstname() + " " + employer.getPatronic());
         employerService.save(employer);
+        return employer;
     }
 
     @PutMapping("{id}")
