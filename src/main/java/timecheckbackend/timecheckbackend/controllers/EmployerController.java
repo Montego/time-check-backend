@@ -24,6 +24,16 @@ public class EmployerController {
         System.out.println("get all employers");
         return employerService.getAll();
     }
+    @GetMapping("/fullname")
+    public List<String> getListFullName() throws NoSuchFieldException {
+        System.out.println("get fullname employers");
+        return employerService.getAllFullNames();
+    }
+    @GetMapping("/lastname")
+    public List<String> getListLastname() throws NoSuchFieldException {
+        System.out.println("get lastname employers");
+        return employerService.getAllLastnames();
+    }
 
     @GetMapping("{id}")
     public Employer getOne(@PathVariable Long id) {
@@ -41,11 +51,20 @@ public class EmployerController {
     }
 
     @PutMapping("{id}")
-    public void update(
-            @PathVariable("id") Employer employerFromDB,
+    public Employer update(
+            @PathVariable Long id,
+//            @PathVariable("id") Employer employerFromDB,
             @RequestBody Employer employer) {
+        Employer employerFromDB = employerService.getOne(id);
+        String firstNameFromDB = employerFromDB.getFirstname();
+        String lastNameFromDB = employerFromDB.getLastname();
+        String patronicFromDB = employerFromDB.getPatronic();
+        String birthFromDB = employerFromDB.getBirthday();
+
+
         BeanUtils.copyProperties(employer, employerFromDB, "id");
         employerService.save(employerFromDB);
+        return employer;
     }
 
     @DeleteMapping("{id}")

@@ -2,6 +2,7 @@ package timecheckbackend.timecheckbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.Generated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,20 +24,20 @@ public class Employer {
     private String firstname;
 
     private String patronic;
-
+@Generated
     private String fullname = lastname + " " + firstname + " " + patronic;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(updatable = false)
     private LocalDateTime creationDate;
 
-    @ManyToMany
-    @JoinTable(
-            name="employers_tabels",
-            joinColumns = {@JoinColumn(name = "employer_id")},
-            inverseJoinColumns = {@JoinColumn(name="tabel_id")}
-    )
-    private Set<Tabel> tabels = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name="employers_tabels",
+//            joinColumns = {@JoinColumn(name = "employer_id")},
+//            inverseJoinColumns = {@JoinColumn(name="tabel_id")}
+//    )
+//    private Set<Tabel> tabels = new HashSet<>();
 
 
     @NotBlank(message = "Birthday Date can't be empty")
@@ -46,5 +47,8 @@ public class Employer {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fullEventsList_id")
     private FullEventsList fullEventsList;
+
+    @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Tabel> tabel;
 
 }

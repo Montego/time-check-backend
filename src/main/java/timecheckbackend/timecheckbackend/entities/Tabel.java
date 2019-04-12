@@ -16,13 +16,13 @@ public class Tabel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-@ManyToMany
-@JoinTable(
-        name="tabels_employers",
-        joinColumns = {@JoinColumn(name = "tabel_id")},
-        inverseJoinColumns = {@JoinColumn(name="employer_id")}
-        )
-    private Set<Employer> employers = new HashSet<>();
+//@ManyToMany
+//@JoinTable(
+//        name="tabels_employers",
+//        joinColumns = {@JoinColumn(name = "tabel_id")},
+//        inverseJoinColumns = {@JoinColumn(name="employer_id")}
+//        )
+//    private Set<Employer> employers = new HashSet<>();
 
 
 //    @NotBlank(message = "Date for tabel can't be empty")
@@ -42,5 +42,9 @@ public class Tabel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fullEventsList_id")
     private FullEventsList fullEventsList;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employer_id")
+    private Employer employer;
 
 }

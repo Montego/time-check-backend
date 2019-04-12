@@ -33,7 +33,17 @@ public class EmployerService {
     }
 
     public List<Employer> getAll() {
-        return employerRepository.findAllByOrderByIdAsc();
+        return employerRepository.findAll();
 //        return employerRepository.findAll();
+    }
+
+    public List<String> getAllFullNames() throws NoSuchFieldException {
+
+        return employerRepository.findAllByFullname();
+//        return employerRepository.findAll();
+    }
+
+    public List<String> getAllLastnames() {
+        return employerRepository.findAllByLastname();
     }
 }
