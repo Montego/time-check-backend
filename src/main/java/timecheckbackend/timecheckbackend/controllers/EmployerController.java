@@ -39,7 +39,7 @@ public class EmployerController {
         return employerService.getAllFullNames();
     }
     @GetMapping("/lastname")
-    public List<String> getListLastname() throws NoSuchFieldException {
+    public List<String> getListLastname(){
         System.out.println("get lastname employers");
         return employerService.getAllLastnames();
     }
@@ -69,7 +69,7 @@ public class EmployerController {
         String lastNameFromDB = employerFromDB.getLastname();
         String patronicFromDB = employerFromDB.getPatronic();
         String birthFromDB = employerFromDB.getBirthday();
-
+        System.out.println("update employer");
 
         BeanUtils.copyProperties(employer, employerFromDB, "id");
         employerService.save(employerFromDB);

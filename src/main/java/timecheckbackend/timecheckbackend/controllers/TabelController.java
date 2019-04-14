@@ -1,5 +1,6 @@
 package timecheckbackend.timecheckbackend.controllers;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timecheckbackend.timecheckbackend.entities.Employer;
@@ -42,13 +43,12 @@ public class TabelController {
 
     @PostMapping()
     public TabelResponse create(@RequestBody TabelRequest tabelRequest) {
-//        employer.setCreationDate(LocalDateTime.now());
-        Set<Tabel> tabels = new HashSet<>();
 
         Employer employer = employerService.getOne(tabelRequest.getFullname());
         String fullname = employer.getFullname();
-        tabels.add(tabelService.getOne(tabelRequest.getId()));
-        employer.setTabel(tabels);
+//        Set<Tabel> tabels = new HashSet<>();
+//        tabels.add(tabelService.getOne(tabelRequest.getId()));
+//        employer.setTabel(tabels);
 
         System.out.println("save tabel");
         Tabel tabel = new Tabel(
@@ -71,6 +71,40 @@ public class TabelController {
                 tabelRequest.getSeakleave(),
                 tabelRequest.getTime_off(),
                 tabelRequest.getVacation());
+        return tabelResponse;
+    }
+
+
+    @PutMapping("{id}")
+    public TabelResponse update(
+            @PathVariable Long id,
+            @RequestBody TabelRequest tabelRequest
+    ){
+        Tabel tabelFromDB = tabelService.getOne(id);
+
+        Employer employer = employerService.getOne(tabelRequest.getFullname());
+        String fullname = employer.getFullname();
+        Tabel tabel = new Tabel(
+                tabelRequest.getId(),
+                tabelRequest.getDate_of(),
+                tabelRequest.getOvertime(),
+                tabelRequest.getLesstime(),
+                tabelRequest.getSeakleave(),
+                tabelRequest.getTime_off(),
+                tabelRequest.getVacation(),
+                employer);
+        TabelResponse tabelResponse = new TabelResponse(
+                tabelRequest.getId(),
+                fullname,
+                tabelRequest.getDate_of(),
+                tabelRequest.getOvertime(),
+                tabelRequest.getLesstime(),
+                tabelRequest.getSeakleave(),
+                tabelRequest.getTime_off(),
+                tabelRequest.getVacation());
+
+        System.out.println("update tabel");
+        BeanUtils.copyProperties(tabel, tabelFromDB, "id");
         return tabelResponse;
     }
 
