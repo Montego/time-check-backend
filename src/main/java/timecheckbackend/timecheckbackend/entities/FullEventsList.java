@@ -12,12 +12,18 @@ public class FullEventsList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Event> event;
+//    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Event> event;
+//
+//    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Employer> employer;
+//
+//    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Tabel> tabel;
 
-    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Employer> employer;
+    private String date_of;
 
-    @OneToMany(mappedBy = "fullEventsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tabel> tabel;
+    private String name;
+
+    private String full_info;
 }

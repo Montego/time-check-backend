@@ -27,9 +27,9 @@ public class Employer {
 @Generated
     private String fullname = lastname + " " + firstname + " " + patronic;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(updatable = false)
-    private LocalDateTime creationDate;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//    @Column(updatable = false)
+//    private LocalDateTime creationDate;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -40,15 +40,15 @@ public class Employer {
 //    private Set<Tabel> tabels = new HashSet<>();
 
 
-    @NotBlank(message = "Birthday Date can't be empty")
+//    @NotBlank(message = "Birthday Date can't be empty")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String birthday;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fullEventsList_id")
-    private FullEventsList fullEventsList;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "fullEventsList_id")
+//    private FullEventsList fullEventsList;
 
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tabel> tabel;
+    private Set<Tabel> tabel = new HashSet<>();
 
 }

@@ -4,6 +4,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timecheckbackend.timecheckbackend.entities.Employer;
+import timecheckbackend.timecheckbackend.payloads.EmployerFullnameResponse;
+import timecheckbackend.timecheckbackend.payloads.EmployerResponse;
 import timecheckbackend.timecheckbackend.services.EmployerService;
 
 import java.time.LocalDateTime;
@@ -20,10 +22,17 @@ public class EmployerController {
     }
 
     @GetMapping
-    public List<Employer> getList() {
+    public List<EmployerResponse> getList() {
         System.out.println("get all employers");
-        return employerService.getAll();
+
+//        return employerService.getAll();
+        return employerService.getAllEmployersResponse();
     }
+    @GetMapping("/full")
+    public List<EmployerFullnameResponse> getListFullnameResponse() {
+        return employerService.getAllEmployersFullnameResponse();
+    }
+
     @GetMapping("/fullname")
     public List<String> getListFullName() throws NoSuchFieldException {
         System.out.println("get fullname employers");
@@ -43,7 +52,7 @@ public class EmployerController {
 
     @PostMapping()
     public Employer create(@RequestBody Employer employer) {
-        employer.setCreationDate(LocalDateTime.now());
+//        employer.setCreationDate(LocalDateTime.now());
         System.out.println("save employer");
         employer.setFullname(employer.getLastname() + " " +  employer.getFirstname() + " " + employer.getPatronic());
         employerService.save(employer);

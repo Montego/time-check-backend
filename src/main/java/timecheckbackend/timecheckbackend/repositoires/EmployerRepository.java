@@ -13,4 +13,7 @@ public interface EmployerRepository extends JpaRepository<Employer, Long> {
 
     @Query("SELECT lastname FROM Employer")
     List<String> findAllByLastname();
+
+    @Query("SELECT lastname,firstname,birthday FROM Employer")
+    List<Employer> findAllByLastnameAndFirstnameAndBirthday();
 }

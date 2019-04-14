@@ -1,5 +1,5 @@
-package timecheckbackend.timecheckbackend.Config;
-
-public class WebMvcConfigurer {
-
-}
+//package timecheckbackend.timecheckbackend.Config;
+//
+//public class WebMvcConfigurer {
+//
+//}

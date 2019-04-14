@@ -20,6 +20,7 @@ public class FullEventsListController {
 
     @GetMapping
     public List<FullEventsList> getList() {
+
         return fullEventsListService.getAll();
     }
 

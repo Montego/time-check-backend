@@ -1,7 +1,9 @@
 package timecheckbackend.timecheckbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +13,8 @@ import java.util.Set;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tabel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,11 +43,11 @@ public class Tabel {
 
     private int vacation;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fullEventsList_id")
-    private FullEventsList fullEventsList;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "fullEventsList_id")
+//    private FullEventsList fullEventsList;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")
     private Employer employer;
 

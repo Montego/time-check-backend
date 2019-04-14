@@ -1,51 +1,89 @@
 package timecheckbackend.timecheckbackend.controllers;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import timecheckbackend.timecheckbackend.entities.Employer;
 import timecheckbackend.timecheckbackend.entities.Tabel;
-import timecheckbackend.timecheckbackend.repositoires.TabelRepository;
+import timecheckbackend.timecheckbackend.payloads.TabelRequest;
+import timecheckbackend.timecheckbackend.payloads.TabelResponse;
+import timecheckbackend.timecheckbackend.services.EmployerService;
+import timecheckbackend.timecheckbackend.services.TabelService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/tabel")
 public class TabelController {
-    private final TabelRepository tabelRepository;
+    private final TabelService tabelService;
+    private final EmployerService employerService;
 
     @Autowired
-    public TabelController(TabelRepository tabelRepository) {
-        this.tabelRepository = tabelRepository;
+    public TabelController(TabelService tabelService, EmployerService employerService) {
+        this.tabelService = tabelService;
+        this.employerService = employerService;
     }
 
+//    @GetMapping
+//    public List<Tabel> list() {
+//        return tabelService.getAll();
+//    }
+
     @GetMapping
-    public List<Tabel> list() {
-        return tabelRepository.findAll();
+    public List<TabelResponse> list() {
+        return tabelService.getAllResponse();
     }
 
     @GetMapping("{id}")
-    public Tabel getOne(@PathVariable("id") Tabel tabel) {
-        return tabel;
+    public Tabel getOne(@PathVariable Long id) {
+        return tabelService.getOne(id);
     }
 
     @PostMapping()
-    public Tabel create(@RequestBody Tabel tabel) {
+    public TabelResponse create(@RequestBody TabelRequest tabelRequest) {
 //        employer.setCreationDate(LocalDateTime.now());
+        Set<Tabel> tabels = new HashSet<>();
+
+        Employer employer = employerService.getOne(tabelRequest.getFullname());
+        String fullname = employer.getFullname();
+        tabels.add(tabelService.getOne(tabelRequest.getId()));
+        employer.setTabel(tabels);
+
         System.out.println("save tabel");
-        tabelRepository.save(tabel);
-        return tabel;
+        Tabel tabel = new Tabel(
+                tabelRequest.getId(),
+                tabelRequest.getDate_of(),
+                tabelRequest.getOvertime(),
+                tabelRequest.getLesstime(),
+                tabelRequest.getSeakleave(),
+                tabelRequest.getTime_off(),
+                tabelRequest.getVacation(),
+                employer);
+        tabelService.add(tabel);
+
+        TabelResponse tabelResponse = new TabelResponse(
+                tabelRequest.getId(),
+                fullname,
+                tabelRequest.getDate_of(),
+                tabelRequest.getOvertime(),
+                tabelRequest.getLesstime(),
+                tabelRequest.getSeakleave(),
+                tabelRequest.getTime_off(),
+                tabelRequest.getVacation());
+        return tabelResponse;
     }
 
-    @PutMapping("{id}")
-    public Tabel update(
-            @PathVariable("id") Tabel tabelFromDB,
-            @RequestBody Tabel tabel) {
-        BeanUtils.copyProperties(tabel, tabelFromDB, "id");
-        return tabelRepository.save(tabelFromDB);
-    }
+//    @PutMapping("{id}")
+//    public Tabel update(
+//            @PathVariable("id") Tabel tabelFromDB,
+//            @RequestBody Tabel tabel) {
+//        BeanUtils.copyProperties(tabel, tabelFromDB, "id");
+//        return tabelService.(tabelFromDB);
+//    }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Tabel tabel) {
-        tabelRepository.delete(tabel);
+    public void delete(@PathVariable Long id) {
+        tabelService.delete(id);
     }
 }
