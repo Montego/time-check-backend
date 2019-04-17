@@ -32,6 +32,10 @@ public class EmployerController {
     public List<EmployerFullnameResponse> getListFullnameResponse() {
         return employerService.getAllEmployersFullnameResponse();
     }
+    @GetMapping("/hi")
+    public String getTestString() {
+        return "Hello блэд";
+    }
 
     @GetMapping("/fullname")
     public List<String> getListFullName() throws NoSuchFieldException {
@@ -65,10 +69,10 @@ public class EmployerController {
 //            @PathVariable("id") Employer employerFromDB,
             @RequestBody Employer employer) {
         Employer employerFromDB = employerService.getOne(id);
-        String firstNameFromDB = employerFromDB.getFirstname();
-        String lastNameFromDB = employerFromDB.getLastname();
-        String patronicFromDB = employerFromDB.getPatronic();
-        String birthFromDB = employerFromDB.getBirthday();
+//        String firstNameFromDB = employerFromDB.getFirstname();
+//        String lastNameFromDB = employerFromDB.getLastname();
+//        String patronicFromDB = employerFromDB.getPatronic();
+//        String birthFromDB = employerFromDB.getBirthday();
         System.out.println("update employer");
 
         BeanUtils.copyProperties(employer, employerFromDB, "id");

@@ -1,6 +1,5 @@
 package timecheckbackend.timecheckbackend.services;
 
-import javafx.collections.transformation.FilteredList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import timecheckbackend.timecheckbackend.entities.Employer;

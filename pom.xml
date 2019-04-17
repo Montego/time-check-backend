@@ -10,15 +10,27 @@
     </parent>
     <groupId>time-check-backend</groupId>
     <artifactId>time-check-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>v0.1</version>
     <name>time-check-backend</name>
     <description>Backend time check</description>
 
+    <packaging>war</packaging>
+    <!--<build>-->
+        <!--<finalName>${artifactId}</finalName>-->
+        <!--...-->
+    <!--</build>-->
+
     <properties>
         <java.version>1.8</java.version>
+
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
