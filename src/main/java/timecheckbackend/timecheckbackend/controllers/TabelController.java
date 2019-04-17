@@ -33,7 +33,7 @@ public class TabelController {
 
     @GetMapping
     public List<TabelResponse> list() {
-        return tabelService.getAllResponse();
+        return tabelService.getAllTabelResponse();
     }
 
     @GetMapping("{id}")

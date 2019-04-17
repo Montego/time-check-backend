@@ -20,15 +20,6 @@ public class Tabel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-//@ManyToMany
-//@JoinTable(
-//        name="tabels_employers",
-//        joinColumns = {@JoinColumn(name = "tabel_id")},
-//        inverseJoinColumns = {@JoinColumn(name="employer_id")}
-//        )
-//    private Set<Employer> employers = new HashSet<>();
-
-
 //    @NotBlank(message = "Date for tabel can't be empty")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String date_of;
@@ -42,10 +33,6 @@ public class Tabel {
     private int time_off;
 
     private int vacation;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "fullEventsList_id")
-//    private FullEventsList fullEventsList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")

@@ -31,22 +31,10 @@ public class Employer {
 //    @Column(updatable = false)
 //    private LocalDateTime creationDate;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name="employers_tabels",
-//            joinColumns = {@JoinColumn(name = "employer_id")},
-//            inverseJoinColumns = {@JoinColumn(name="tabel_id")}
-//    )
-//    private Set<Tabel> tabels = new HashSet<>();
-
 
 //    @NotBlank(message = "Birthday Date can't be empty")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String birthday;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "fullEventsList_id")
-//    private FullEventsList fullEventsList;
 
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tabel> tabel = new HashSet<>();

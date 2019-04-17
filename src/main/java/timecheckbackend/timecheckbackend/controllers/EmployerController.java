@@ -2,18 +2,15 @@ package timecheckbackend.timecheckbackend.controllers;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//import timecheckbackend.timecheckbackend.Util.ApiResponse;
 import timecheckbackend.timecheckbackend.entities.Employer;
 import timecheckbackend.timecheckbackend.payloads.EmployerFullnameResponse;
 import timecheckbackend.timecheckbackend.payloads.EmployerResponse;
 import timecheckbackend.timecheckbackend.services.EmployerService;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
+//import timecheckbackend.timecheckbackend.payloads.ApiResponse;
 
 @RestController
 @RequestMapping("api/employers")
@@ -32,10 +29,12 @@ public class EmployerController {
 //        return employerService.getAll();
         return employerService.getAllEmployersResponse();
     }
+
     @GetMapping("/full")
     public List<EmployerFullnameResponse> getListFullnameResponse() {
         return employerService.getAllEmployersFullnameResponse();
     }
+
     @GetMapping("/hi")
     public String getTestString() {
         return "Hello блэд";
@@ -46,8 +45,9 @@ public class EmployerController {
         System.out.println("get fullname employers");
         return employerService.getAllFullNames();
     }
+
     @GetMapping("/lastname")
-    public List<String> getListLastname(){
+    public List<String> getListLastname() {
         System.out.println("get lastname employers");
         return employerService.getAllLastnames();
     }
@@ -62,17 +62,15 @@ public class EmployerController {
     public Employer create(@RequestBody Employer employer) {
 //        employer.setCreationDate(LocalDateTime.now());
         System.out.println("save employer");
-        employer.setFullname(employer.getLastname() + " " +  employer.getFirstname() + " " + employer.getPatronic());
         employerService.save(employer);
         return employer;
     }
 
 //    @PostMapping()
-//    ResponseEntity<String> create(@RequestBody Employer employer) {
+//    ResponseEntity<ApiResponse> create(@RequestBody Employer employer) {
 //        System.out.println("save employer");
 //        try {
 //            employerService.save(employer);
-//
 //            return new ResponseEntity<>(new ApiResponse(true,
 //                    "Success add new employer"),HttpStatus.OK);
 //        } catch (Exception e) {
