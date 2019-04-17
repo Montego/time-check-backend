@@ -2,7 +2,11 @@ package timecheckbackend.timecheckbackend.controllers;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import timecheckbackend.timecheckbackend.Util.ApiResponse;
 import timecheckbackend.timecheckbackend.entities.Employer;
 import timecheckbackend.timecheckbackend.payloads.EmployerFullnameResponse;
 import timecheckbackend.timecheckbackend.payloads.EmployerResponse;
@@ -62,6 +66,20 @@ public class EmployerController {
         employerService.save(employer);
         return employer;
     }
+
+//    @PostMapping()
+//    ResponseEntity<String> create(@RequestBody Employer employer) {
+//        System.out.println("save employer");
+//        try {
+//            employerService.save(employer);
+//
+//            return new ResponseEntity<>(new ApiResponse(true,
+//                    "Success add new employer"),HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(new ApiResponse(false,
+//                    "Can't to add new employer to database"),HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     @PutMapping("{id}")
     public Employer update(

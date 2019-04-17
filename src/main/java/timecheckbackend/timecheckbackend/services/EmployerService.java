@@ -24,6 +24,7 @@ public class EmployerService {
     }
 
     public void save(Employer employer) {
+        employer.setFullname(employer.getLastname() + " " + employer.getFirstname() + " " + employer.getPatronic());
         employerRepository.save(employer);
     }
 
