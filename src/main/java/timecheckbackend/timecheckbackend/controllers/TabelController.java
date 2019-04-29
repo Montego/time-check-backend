@@ -43,7 +43,6 @@ public class TabelController {
 
     @PostMapping()
     public TabelResponse create(@RequestBody TabelRequest tabelRequest) {
-
         Employer employer = employerService.getOne(tabelRequest.getFullname());
         String fullname = employer.getFullname();
 //        Set<Tabel> tabels = new HashSet<>();
@@ -76,48 +75,20 @@ public class TabelController {
 
 
     @PutMapping("{id}")
-    public TabelResponse update(
-            @PathVariable Long id,
-            @RequestBody TabelRequest tabelRequest
-    ){
-        Tabel tabelFromDB = tabelService.getOne(id);
-
+    public void update(
+            @PathVariable("id") Tabel tabelFromDB,
+            @RequestBody TabelRequest tabelRequest) {
+        BeanUtils.copyProperties(tabelRequest, tabelFromDB, "id");
         Employer employer = employerService.getOne(tabelRequest.getFullname());
-        String fullname = employer.getFullname();
-        Tabel tabel = new Tabel(
-                tabelRequest.getId(),
-                tabelRequest.getDate_of(),
-                tabelRequest.getOvertime(),
-                tabelRequest.getLesstime(),
-                tabelRequest.getSeakleave(),
-                tabelRequest.getTime_off(),
-                tabelRequest.getVacation(),
-                employer);
-        TabelResponse tabelResponse = new TabelResponse(
-                tabelRequest.getId(),
-                fullname,
-                tabelRequest.getDate_of(),
-                tabelRequest.getOvertime(),
-                tabelRequest.getLesstime(),
-                tabelRequest.getSeakleave(),
-                tabelRequest.getTime_off(),
-                tabelRequest.getVacation());
-
+        tabelFromDB.setEmployer(employer);
         System.out.println("update tabel");
-        BeanUtils.copyProperties(tabel, tabelFromDB, "id");
-        return tabelResponse;
-    }
+        tabelService.add(tabelFromDB);
 
-//    @PutMapping("{id}")
-//    public Tabel update(
-//            @PathVariable("id") Tabel tabelFromDB,
-//            @RequestBody Tabel tabel) {
-//        BeanUtils.copyProperties(tabel, tabelFromDB, "id");
-//        return tabelService.(tabelFromDB);
-//    }
+    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
+        System.out.println("delete tabel");
         tabelService.delete(id);
     }
 }

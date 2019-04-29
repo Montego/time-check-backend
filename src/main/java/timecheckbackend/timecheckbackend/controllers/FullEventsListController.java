@@ -20,31 +20,6 @@ public class FullEventsListController {
 
     @GetMapping
     public List<FullEventsList> getList() {
-
         return fullEventsListService.getAll();
-    }
-
-    @GetMapping("{id}")
-    public FullEventsList getOne(@PathVariable Long id) {
-        return fullEventsListService.getOne(id);
-    }
-
-    @PostMapping()
-    public void create(@RequestBody FullEventsList fullEventsList) {
-//        employer.setCreationDate(LocalDateTime.now());
-        fullEventsListService.save(fullEventsList);
-    }
-
-    @PutMapping("{id}")
-    public void update(
-            @PathVariable("id") FullEventsList fullEventsListFromDB,
-            @RequestBody FullEventsList fullEventsList) {
-        BeanUtils.copyProperties(fullEventsList, fullEventsListFromDB, "id");
-        fullEventsListService.save(fullEventsListFromDB);
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        fullEventsListService.delete(id);
     }
 }

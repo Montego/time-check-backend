@@ -26,4 +26,9 @@ public class Event {
 
     private String full_info;
 
+    private boolean is_done = false;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "fullEventsList_id")
+//    private FullEventsList fullEventsList;
 }

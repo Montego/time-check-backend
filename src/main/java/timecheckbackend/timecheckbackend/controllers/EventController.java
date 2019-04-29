@@ -21,6 +21,7 @@ public class EventController {
 
     @GetMapping
     public List<Event> eventsList() {
+        System.out.println("get events");
         return eventService.getAll();
     }
 
@@ -37,16 +38,30 @@ public class EventController {
         return event;
     }
 
+    @PutMapping("{id}/done")
+    public void isDone(
+            @PathVariable("id") Long id,
+            @RequestBody boolean is_done) {
+        Event eventFromDB = eventService.getOne(id);
+        Event newPropEvent = eventService.getOne(id);
+        newPropEvent.set_done(is_done);
+        BeanUtils.copyProperties(newPropEvent, eventFromDB, "id");
+        System.out.println("is done  = "+ is_done);
+        eventService.save(eventFromDB);
+    }
+
     @PutMapping("{id}")
     public void update(
             @PathVariable("id") Event eventFromDB,
             @RequestBody Event event) {
         BeanUtils.copyProperties(event, eventFromDB, "id");
+        System.out.println("update event");
         eventService.save(eventFromDB);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
+        System.out.println("delete event");
         eventService.delete(id);
     }
 }
