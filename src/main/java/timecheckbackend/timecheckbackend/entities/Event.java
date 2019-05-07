@@ -17,11 +17,11 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Date can't be empty")
+//    @NotBlank(message = "Date can't be empty")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String date_of;
 
-    @NotBlank(message = "Event's name can't be empty")
+//    @NotBlank(message = "Event's name can't be empty")
     private String name;
 
     private String full_info;

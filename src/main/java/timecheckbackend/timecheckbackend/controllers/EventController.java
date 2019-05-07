@@ -38,16 +38,18 @@ public class EventController {
         return event;
     }
 
-    @PutMapping("{id}/done")
+    @PutMapping("{id}/{is_done}")
     public void isDone(
             @PathVariable("id") Long id,
-            @RequestBody boolean is_done) {
+            @PathVariable("is_done") boolean is_done)
+    {
         Event eventFromDB = eventService.getOne(id);
         Event newPropEvent = eventService.getOne(id);
         newPropEvent.set_done(is_done);
         BeanUtils.copyProperties(newPropEvent, eventFromDB, "id");
         System.out.println("is done  = "+ is_done);
         eventService.save(eventFromDB);
+
     }
 
     @PutMapping("{id}")

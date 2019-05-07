@@ -24,8 +24,8 @@ public class Employer {
     private String firstname;
 
     private String patronic;
-@Generated
-    private String fullname = lastname + " " + firstname + " " + patronic;
+
+    private String fullname;
 
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 //    @Column(updatable = false)

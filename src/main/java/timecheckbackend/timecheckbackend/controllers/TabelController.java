@@ -80,9 +80,21 @@ public class TabelController {
             @RequestBody TabelRequest tabelRequest) {
         BeanUtils.copyProperties(tabelRequest, tabelFromDB, "id");
         Employer employer = employerService.getOne(tabelRequest.getFullname());
+        String fullname = employer.getFullname();
         tabelFromDB.setEmployer(employer);
         System.out.println("update tabel");
         tabelService.add(tabelFromDB);
+
+//        TabelResponse tabelResponse = new TabelResponse(
+//                tabelRequest.getId(),
+//                fullname,
+//                tabelRequest.getDate_of(),
+//                tabelRequest.getOvertime(),
+//                tabelRequest.getLesstime(),
+//                tabelRequest.getSeakleave(),
+//                tabelRequest.getTime_off(),
+//                tabelRequest.getVacation());
+//        return tabelResponse;
 
     }
 
